@@ -12,9 +12,8 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 public class StudentData {
+    private static final String filename = "student-data.txt";
     private static StudentData instance = new StudentData();
-    private static String filename = "student-data.txt";
-
     private ObservableList<Student> students;
 
     public static StudentData getInstance() {
@@ -57,8 +56,6 @@ public class StudentData {
         Path path = Paths.get(filename);
         BufferedWriter bw = Files.newBufferedWriter(path);
         try {
-            /* DONE: complete the iterator
-             */
             Iterator<Student> it = students.iterator();
             while (it.hasNext()) {
                 Student item = it.next();
