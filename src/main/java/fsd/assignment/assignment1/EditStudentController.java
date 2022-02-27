@@ -38,7 +38,6 @@ public class EditStudentController {
         mod3ChoiceEdit.setOnAction(this::getChoiceEdit);
     }
 
-    //to ensure that detail pops up to edit
     public void setToEdit(Student stu) {
         yearStudyDisplay.setText(stu.getYearOfStudy());
         mod1Edit.setText(stu.getModule1());
@@ -61,7 +60,8 @@ public class EditStudentController {
     }
 
     public void getChoiceEdit(ActionEvent event) {
-        /* TODO: complete the 3 if... statements using event
-         */
+        mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
+        mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
+        mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
     }
 }
