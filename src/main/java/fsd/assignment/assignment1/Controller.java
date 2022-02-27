@@ -87,30 +87,17 @@ public class Controller {
         deleteStudent.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String stdId = event.getTarget().toString();
-
-                /* TODO: get the item to be deleted and call the deleteStudent()
-                 */
+                Student student = studentListView.getSelectionModel().getSelectedItem();
+                deleteStudent(student);
             }
         });
 
-        listContextMenu.getItems().add(deleteStudent);
-
-        //editing a student
-        /* TODO: create a new listContextMenu -> defined above in the variables
-         */
-        listContextMenu = null;
-
-        /* TODO: create a MenuItem object so that when the user right-clicks a studId
-                 the word Edit?? appears
-         */
-        MenuItem editStudent = null;
-
+        MenuItem editStudent = new MenuItem("Edit??");
         editStudent.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                /* TODO: get the item to be edited and call the editStudent()
-                 */
+                Student student = studentListView.getSelectionModel().getSelectedItem();
+                editStudent(student);
             }
         });
 

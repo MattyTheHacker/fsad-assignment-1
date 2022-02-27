@@ -7,8 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-//this class is given to you
+
 public class Main extends Application {
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main-view.fxml"));
@@ -18,24 +22,20 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
     @Override
-    public void stop() throws IOException{
-        try{
+    public void stop() throws IOException {
+        try {
             StudentData.getInstance().storeStudentData();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public void init() throws IOException{
-        try{ //load the data in
+    public void init() throws IOException {
+        try { //load the data in
             StudentData.getInstance().loadStudentData();
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
