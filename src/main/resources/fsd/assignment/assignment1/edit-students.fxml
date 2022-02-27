@@ -20,7 +20,7 @@
             <ChoiceBox fx:id="mod1ChoiceEdit" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="mod2ChoiceEdit" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <ChoiceBox fx:id="mod3ChoiceEdit" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Label fx:id="yearStudyDisplay" GridPane.rowIndex="3" />
+            <Label fx:id="yearStudyDisplay" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="4" />
             <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          <Label fx:id="mod1Edit" GridPane.columnIndex="1" GridPane.rowIndex="1" />
