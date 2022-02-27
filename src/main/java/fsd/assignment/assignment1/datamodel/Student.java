@@ -41,15 +41,4 @@ public class Student {
                 "studId='" + studId + '\'' +
                 '}';
     }
-
-    /* DONE: the constructor must accept parameters so that all
-             instance variables are set accordingly
-    */
-
-    /* DONE: ensure that all getters are included here
-     */
-
-    /* DONE: include a toString() that returns studId
-     */
-
 }
