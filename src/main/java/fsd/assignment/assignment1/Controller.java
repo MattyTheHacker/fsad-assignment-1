@@ -101,22 +101,22 @@ public class Controller {
             }
         });
 
-        //code provided to ensure that contextMenu appears as part of the above actions
         listContextMenu.getItems().add(deleteStudent);
         listContextMenu.getItems().add(editStudent);
 
-        //to ensure access to a particular cell in the studentListView
         studentListView.setCellFactory(new Callback<ListView<Student>, ListCell<Student>>() {
             public ListCell<Student> call(ListView<Student> param) {
                 ListCell<Student> cell = new ListCell<Student>() {
                     @Override
                     protected void updateItem(Student stu, boolean empty) {
-                        /* TODO: ensure that the studentListView has studId's or not when
-                                 the delete a student takes place
-                         */
-                    }//end of update()
+                        super.updateItem(stu, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText(stu.getStudId());
+                        }
+                    }
                 };
-                //code included as part of the delete
                 cell.emptyProperty().addListener((obs, wasEmpty, isNowEmpty) -> {
                     if (isNowEmpty) {
                         cell.setContextMenu(null);
@@ -126,17 +126,14 @@ public class Controller {
                 });
                 return cell;
             }
-        }); //end of setting the cell factory
+        });
 
-        /* TODO: ensure that the studId's are sorted according to year of study in ascending order
-         */
-        SortedList<Student> sortedByYear = null;
+        SortedList<Student> sortedByYear = new SortedList<>(StudentData.getInstance().getStudents(),
+                Comparator.comparing(Student::getYearOfStudy));
 
-        /* TODO: step 1 - set items using the sorted list
-                 step 2 - ensure that only one studId can be selected at one time
-                 step 3 - ensure that the first studId is highlighted when the application commences
-         */
-
+        studentListView.setItems(sortedByYear);
+        studentListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        studentListView.getSelectionModel().selectFirst();
     }
 
     public void getChoice(ActionEvent event) {
