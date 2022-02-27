@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<DialogPane prefHeight="209.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+<DialogPane prefHeight="173.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="fsd.assignment.assignment1.EditStudentController">
     <content>
         <GridPane hgap="20" prefHeight="157.0" prefWidth="624.0" vgap="20">
@@ -16,8 +16,6 @@
             <ChoiceBox fx:id="mod2ChoiceEdit" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
             <ChoiceBox fx:id="mod3ChoiceEdit" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
             <Label fx:id="yearStudyDisplay" GridPane.rowIndex="1"/>
-            <Button mnemonicParsing="false" text="OK" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
-            <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
             <Label fx:id="mod1Edit" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
             <Label fx:id="mod2Edit" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
             <Label fx:id="mod3Edit" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
@@ -36,7 +34,6 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
