@@ -30,7 +30,7 @@
             <children>
                 <Label text="StudentID" />
                 <Label text="Year of Study" GridPane.rowIndex="1" />
-                <Button contentDisplay="CENTER" mnemonicParsing="false" text="Add.." GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#addStudentData" text="Add.." GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label text="Module Option 1" GridPane.columnIndex="2" />
                 <Label text="Module Option 2" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                 <Label text="Module Option 3" GridPane.columnIndex="2" GridPane.rowIndex="2" />

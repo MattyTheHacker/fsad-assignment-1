@@ -4,27 +4,17 @@ import fsd.assignment.assignment1.datamodel.Student;
 import fsd.assignment.assignment1.datamodel.StudentData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -84,7 +74,7 @@ public class Controller {
         listContextMenu = new ContextMenu();
         MenuItem deleteStudent = new MenuItem("Delete?");
 
-        deleteStudent.setOnAction(new EventHandler<ActionEvent>() {
+        deleteStudent.setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent event) {
                 Student student = studentListView.getSelectionModel().getSelectedItem();
@@ -128,8 +118,7 @@ public class Controller {
             }
         });
 
-        SortedList<Student> sortedByYear = new SortedList<>(StudentData.getInstance().getStudents(),
-                Comparator.comparing(Student::getYearOfStudy));
+        SortedList<Student> sortedByYear = new SortedList<>(StudentData.getInstance().getStudents(), Comparator.comparing(Student::getYearOfStudy));
 
         studentListView.setItems(sortedByYear);
         studentListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -137,96 +126,67 @@ public class Controller {
     }
 
     public void getChoice(ActionEvent event) {
-        /* TODO: make use of event to determine each choice and assign each module choice to
-                 choice1, choice2 and choice3
-         */
+        // TODO: Might still be fucked. Come back to this later...
+        choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+        choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+        choice3 = mod3Choice.getSelectionModel().getSelectedItem();
     }
 
 
     @FXML
     public void addStudentData() {
-        /* TODO: get the values from the textfields
-         */
-        String studIdS = null;
-        String yearStudyS = null;
-        /* TODO: validate whether the studIdS and yearStudyS are occupied, BOTH have to be occupied
-                 for the add to take place, if one or both are unoccupied print the following message
-                 in the validateStudent label -> message to be printed is
-                 "Error: cannot add student if studId or year of study not filled in"
-                 If both are occupied then go ahead with the addStudentData()
-         */
-        //do the if...here
+        String studIdS = studId.getText();
+        String yearStudyS = yearStudy.getText();
 
-        //do the else...here, first ensure that the validateStudent label is clear of any text
-        studentToAdd = null;
-        //use the getInstance() to addStudentData()
-        //select the student that has been added so that it is highlighted on the list
+        if (studIdS == null || yearStudyS == null) {
+            validateStudent.setVisible(true);
+        } else {
+            studentToAdd = new Student(studIdS, yearStudyS, choice1, choice2, choice3);
+            StudentData.getInstance().addStudentData(studentToAdd);
+            studentListView.getSelectionModel().select(studentToAdd);
+        }
     }
 
     public void deleteStudent(Student stu) {
-        /* TODO: create an alert object to confirm that a user wants to delete
-         */
-        Alert alert = null;
-        /* TODO: set the title with "Delete a student from the list"
-         */
-        //insert the line of code here
-        /* TODO: set the header text with "Deleting student " xxx - where xxx is the studId
-         */
-        //insert the line of code here
-        /* TODO: have a message that asks the user "Are you sure you want to delete the student?"
-         */
-        //insert the line of code here
-        //the result object with the showAndWait() has been completed for you
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete a student from the list");
+        alert.setHeaderText("Deleting student " + stu.getStudId());
+        alert.setContentText("Are you sure you want to delete the student?");
         Optional<ButtonType> result = alert.showAndWait();
-        /* TODO: include a test to verify if the result is present and whether the OK button was
-                 pressed, if so go ahead and call the deleteStudent()
-         */
-        //insert the 2 lines of code here
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            StudentData.getInstance().deleteStudent(stu);
+        }
     }
 
     public void editStudent(Student stu) {
         //the dialog object has been completed for you
         Dialog<ButtonType> dialog = new Dialog<>();
-        /* TODO: use the dialog object to set the owner, the title and the header text
-                 the title must state "Edit a student's details"
-                 the header text must state: Editing student Id: xxx - where xxx is the studId
-         */
-        //insert the 3 lines of code here
-        /* TODO: complete the FXMLLoader statement
-         */
-        FXMLLoader fxmlLoader = null;
-        /* TODO: use the fxmlLoader to set the edit-students.fxml
-         */
-        //insert the line of code here
-        //remove the comments and complete the try...catch
-        //try {
-        /* TODO: load the fxml
-         */
-        //} catch (IOException event) {
-            /* TODO: print an appropriate message if it cannot be loaded
-                     print stacktrace
-             */
-        //    return;
-        //}
-        /* TODO: complete the ec controller statement
-         */
-        EditStudentController ec = null;
-        /* TODO: use the ec object to call setToEdit()
-         */
-        //insert the line of code here
-        /* TODO: create the OK and CANCEL buttons using dialog
-         */
-        //insert the 2 lines of code here
-        //the result object with the showAndWait() has been completed for you
+        dialog.initOwner(mainWindow.getScene().getWindow());
+        dialog.setTitle("Edit a student's details");
+        dialog.setHeaderText("Editing student Id: " + stu.getStudId());
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("edit-students.fxml"));
+
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("[WARN] Could not load the dialog");
+            e.printStackTrace();
+            return;
+        }
+
+        EditStudentController ec = fxmlLoader.getController();
+        ec.setToEdit(stu);
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
         Optional<ButtonType> result = dialog.showAndWait();
 
-         /* TODO: verify if there is an edit to complete, complete the editStudent call processEdit()
-                  ensure that the student edited is selected
-         */
-        //remove the comments and complete the if...
-        //if (xxx) {
-        Student editStudent = null;
-        //select the edited studId here
-        //}
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Student updateStudent = ec.processEdit(stu);
+            studentListView.getSelectionModel().select(updateStudent);
+        }
     }
 }
