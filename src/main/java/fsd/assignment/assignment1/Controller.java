@@ -2,11 +2,8 @@ package fsd.assignment.assignment1;
 
 import fsd.assignment.assignment1.datamodel.Student;
 import fsd.assignment.assignment1.datamodel.StudentData;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -49,19 +46,16 @@ public class Controller {
     private BorderPane mainWindow;
 
     public void initialize() {
-        studentListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Student>() {
-            @Override
-            public void changed(ObservableValue<? extends Student> observable, Student oldValue, Student newValue) {
-                if (newValue != null) {
-                    Student student = studentListView.getSelectionModel().getSelectedItem();
-                    yearStudyView.setText(student.getYearOfStudy());
-                    mod1View.setText(student.getModule1());
-                    mod2View.setText(student.getModule2());
-                    mod3View.setText(student.getModule3());
-                }
+        studentListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                Student student = studentListView.getSelectionModel().getSelectedItem();
+                yearStudyView.setText(student.getYearOfStudy());
+                mod1View.setText(student.getModule1());
+                mod2View.setText(student.getModule2());
+                mod3View.setText(student.getModule3());
             }
         });
-        //the setOnAction ensures that when a ChoiceBox is selected the getChoice() grabs the selected choice
+
         mod1Choice.setOnAction(this::getChoice);
         mod2Choice.setOnAction(this::getChoice);
         mod3Choice.setOnAction(this::getChoice);
@@ -73,29 +67,23 @@ public class Controller {
         listContextMenu = new ContextMenu();
         MenuItem deleteStudent = new MenuItem("Delete?");
 
-        deleteStudent.setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Student student = studentListView.getSelectionModel().getSelectedItem();
-                deleteStudent(student);
-            }
+        deleteStudent.setOnAction(event -> {
+            Student student = studentListView.getSelectionModel().getSelectedItem();
+            deleteStudent(student);
         });
 
         MenuItem editStudent = new MenuItem("Edit??");
-        editStudent.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Student student = studentListView.getSelectionModel().getSelectedItem();
-                editStudent(student);
-            }
+        editStudent.setOnAction(event -> {
+            Student student = studentListView.getSelectionModel().getSelectedItem();
+            editStudent(student);
         });
 
         listContextMenu.getItems().add(deleteStudent);
         listContextMenu.getItems().add(editStudent);
 
-        studentListView.setCellFactory(new Callback<ListView<Student>, ListCell<Student>>() {
+        studentListView.setCellFactory(new Callback<>() {
             public ListCell<Student> call(ListView<Student> param) {
-                ListCell<Student> cell = new ListCell<Student>() {
+                ListCell<Student> cell = new ListCell<>() {
                     @Override
                     protected void updateItem(Student stu, boolean empty) {
                         super.updateItem(stu, empty);
@@ -125,7 +113,6 @@ public class Controller {
     }
 
     public void getChoice(ActionEvent event) {
-        // TODO: Might still be fucked. Come back to this later...
         choice1 = mod1Choice.getSelectionModel().getSelectedItem();
         choice2 = mod2Choice.getSelectionModel().getSelectedItem();
         choice3 = mod3Choice.getSelectionModel().getSelectedItem();
@@ -158,7 +145,6 @@ public class Controller {
     }
 
     public void editStudent(Student stu) {
-        //the dialog object has been completed for you
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainWindow.getScene().getWindow());
         dialog.setTitle("Edit a student's details");
