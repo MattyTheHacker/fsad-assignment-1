@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.Optional;
 
-
 public class Controller {
     private final String[] modChoices = {"OOP", "Data Algo", "DS", "Maths", "AI", "Adv Programming", "Project"};
     public Student studentToAdd;
