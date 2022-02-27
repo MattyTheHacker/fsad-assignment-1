@@ -1,11 +1,11 @@
 package fsd.assignment.assignment1.datamodel;
 
 public class Student {
-    private String studId;
-    private String yearOfStudy;
-    private String module1;
-    private String module2;
-    private String module3;
+    private final String studId;
+    private final String yearOfStudy;
+    private final String module1;
+    private final String module2;
+    private final String module3;
 
     public Student(String studId, String yearOfStudy, String module1, String module2, String module3) {
         this.studId = studId;
@@ -37,8 +37,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "studId='" + studId + '\'' +
-                '}';
+        return "Student{" + "studId='" + studId + '\'' + '}';
     }
 }

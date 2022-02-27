@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
 
 public class StudentData {
     private static final String filename = "student-data.txt";
@@ -30,11 +29,9 @@ public class StudentData {
     public void loadStudentData() throws IOException {
         students = FXCollections.observableArrayList();
         Path path = Paths.get(filename);
-        BufferedReader br = Files.newBufferedReader(path);
 
-        String input;
-
-        try {
+        try (BufferedReader br = Files.newBufferedReader(path)) {
+            String input;
             while ((input = br.readLine()) != null) {
                 String[] studentItem = input.split("\t");
                 String studId = studentItem[0];
@@ -45,20 +42,13 @@ public class StudentData {
                 Student studDataItem = new Student(studId, yearStudy, mod1, mod2, mod3);
                 students.add(studDataItem);
             }
-        } finally {
-            if (br != null) {
-                br.close();
-            }
         }
     }
 
     public void storeStudentData() throws IOException {
         Path path = Paths.get(filename);
-        BufferedWriter bw = Files.newBufferedWriter(path);
-        try {
-            Iterator<Student> it = students.iterator();
-            while (it.hasNext()) {
-                Student item = it.next();
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            for (Student item : students) {
                 String studId = item.getStudId();
                 String year = item.getYearOfStudy();
                 String mod1 = item.getModule1();
@@ -67,10 +57,6 @@ public class StudentData {
                 String student = studId + "\t" + year + "\t" + mod1 + "\t" + mod2 + "\t" + mod3;
                 bw.write(student);
                 bw.newLine();
-            }
-        } finally {
-            if (bw != null) {
-                bw.close();
             }
         }
     }
