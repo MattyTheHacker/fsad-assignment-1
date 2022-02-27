@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 
 
 public class EditStudentController {
-    //all of the variables declared below correspond with the edit-students.fxml
     @FXML
     private Label yearStudyDisplay;
 
@@ -36,7 +35,7 @@ public class EditStudentController {
     //the modChoices variables correspond to the []
     private String mod1S, mod2S, mod3S;
 
-    private String modChoices[] = {"OOP", "Data Algo", "DS", "Maths", "AI",
+    private String[] modChoices = {"OOP", "Data Algo", "DS", "Maths", "AI",
             "Adv Programming", "Project"};
 
     public void initialize() {
