@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class Controller {
-
-    //these variables correspond to the <top> of main-view.fxml
     @FXML
     private TextField studId;
 
@@ -47,19 +45,15 @@ public class Controller {
 
     private String choice1, choice2, choice3;
 
-    private String modChoices[] = {"OOP", "Data Algo", "DS", "Maths", "AI",
+    private String[] modChoices = {"OOP", "Data Algo", "DS", "Maths", "AI",
             "Adv Programming", "Project"};
 
     @FXML
-    private Label validateStudent; //remember this is the Label that you only see when there is an invalid "add"
+    private Label validateStudent;
 
-    //validateStudent is the last element corresponding to <top>
-
-    //these variables correspond to the <left> i.e. the studentListView
     @FXML
     private ListView<Student> studentListView;
 
-    //these variables correspond to the <bottom> part of the border
     @FXML
     private Label yearStudyView;
 
@@ -72,13 +66,9 @@ public class Controller {
     @FXML
     private Label mod3View;
 
-    //mod3View is the last element for the bottom part of the border
-
-    //the contextMenu is used for the right-click regarding Edit / Delete
     @FXML
     private ContextMenu listContextMenu;
 
-    //this variable is used when switching windows from add to edit
     @FXML
     private BorderPane mainWindow;
 
