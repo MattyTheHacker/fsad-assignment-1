@@ -10,8 +10,7 @@ import javafx.scene.control.Label;
 
 
 public class EditStudentController {
-    private final String[] modChoices = {"OOP", "Data Algo", "DS", "Maths", "AI",
-            "Adv Programming", "Project"};
+    private final String[] modChoices = {"OOP", "Data Algo", "DS", "Maths", "AI", "Adv Programming", "Project"};
     @FXML
     private Label yearStudyDisplay;
     @FXML
@@ -60,8 +59,26 @@ public class EditStudentController {
     }
 
     public void getChoiceEdit(ActionEvent event) {
-        mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
-        mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
-        mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+        ChoiceBox<String> cb = (ChoiceBox<String>) event.getSource();
+        mod1S = mod1Edit.getText();
+        mod2S = mod2Edit.getText();
+        mod3S = mod3Edit.getText();
+        switch (cb.getId()) {
+            case "mod1ChoiceEdit" -> {
+                if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                    mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
+                }
+            }
+            case "mod2ChoiceEdit" -> {
+                if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                    mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
+                }
+            }
+            case "mod3ChoiceEdit" -> {
+                if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                    mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+                }
+            }
+        }
     }
 }

@@ -113,9 +113,27 @@ public class Controller {
     }
 
     public void getChoice(ActionEvent event) {
-        choice1 = mod1Choice.getSelectionModel().getSelectedItem();
-        choice2 = mod2Choice.getSelectionModel().getSelectedItem();
-        choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+        ChoiceBox<String> cb = (ChoiceBox<String>) event.getSource();
+        choice1 = mod1View.getText();
+        choice2 = mod2View.getText();
+        choice3 = mod3View.getText();
+        switch (cb.getId()) {
+            case "mod1Choice" -> {
+                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                }
+            }
+            case "mod2Choice" -> {
+                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                }
+            }
+            case "mod3Choice" -> {
+                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                }
+            }
+        }
     }
 
 
@@ -130,6 +148,11 @@ public class Controller {
             studentToAdd = new Student(studIdS, yearStudyS, choice1, choice2, choice3);
             StudentData.getInstance().addStudentData(studentToAdd);
             studentListView.getSelectionModel().select(studentToAdd);
+            studId.clear();
+            yearStudy.clear();
+            mod1Choice.setValue(null);
+            mod2Choice.setValue(null);
+            mod3Choice.setValue(null);
         }
     }
 
