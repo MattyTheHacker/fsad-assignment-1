@@ -114,23 +114,44 @@ public class Controller {
 
     public void getChoice(ActionEvent event) {
         ChoiceBox<String> cb = (ChoiceBox<String>) event.getSource();
-        choice1 = mod1View.getText();
-        choice2 = mod2View.getText();
-        choice3 = mod3View.getText();
         switch (cb.getId()) {
             case "mod1Choice" -> {
-                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice2 = mod2View.getText();
+                }
+                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice3 = mod3View.getText();
                 }
             }
             case "mod2Choice" -> {
-                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice1 = mod1View.getText();
+                }
+                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice3 = mod3View.getText();
                 }
             }
             case "mod3Choice" -> {
-                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice1 = mod1View.getText();
+                }
+                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                    choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                } else {
+                    choice2 = mod2View.getText();
                 }
             }
         }
