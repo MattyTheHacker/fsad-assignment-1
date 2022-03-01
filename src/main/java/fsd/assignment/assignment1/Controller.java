@@ -160,12 +160,11 @@ public class Controller {
 
     @FXML
     public void addStudentData() {
-        String studIdS = studId.getText();
-        String yearStudyS = yearStudy.getText();
-
-        if (studIdS == null || yearStudyS == null) {
+        if (studId.getText().isEmpty() || yearStudy.getText().isEmpty()) {
             validateStudent.setVisible(true);
         } else {
+            String studIdS = studId.getText();
+            String yearStudyS = yearStudy.getText();
             studentToAdd = new Student(studIdS, yearStudyS, choice1, choice2, choice3);
             StudentData.getInstance().addStudentData(studentToAdd);
             studentListView.getSelectionModel().select(studentToAdd);
