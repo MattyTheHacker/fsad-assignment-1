@@ -43,9 +43,23 @@ public class EditStudentController {
         mod2Edit.setText(stu.getModule2());
         mod3Edit.setText(stu.getModule3());
 
-        mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
-        mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
-        mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+        if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+            mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
+        } else {
+            mod1S = mod1Edit.getText();
+        }
+
+        if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+            mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
+        } else {
+            mod2S = mod2Edit.getText();
+        }
+
+        if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+            mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+        } else {
+            mod3S = mod3Edit.getText();
+        }
     }
 
     public Student processEdit(Student stu) {
