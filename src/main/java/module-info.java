@@ -5,5 +5,4 @@ module fsd.assignment.assignment1 {
 
     opens fsd.assignment.assignment1 to javafx.fxml;
     exports fsd.assignment.assignment1;
-    exports fsd.assignment.assignment1.datamodel;
 }
