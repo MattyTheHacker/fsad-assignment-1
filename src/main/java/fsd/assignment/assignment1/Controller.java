@@ -113,47 +113,54 @@ public class Controller {
     }
 
     public void getChoice(ActionEvent event) {
-        ChoiceBox<String> cb = (ChoiceBox<String>) event.getSource();
-        switch (cb.getId()) {
-            case "mod1Choice" -> {
-                choice1 = mod1Choice.getSelectionModel().getSelectedItem();
-                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice2 = mod2Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice2 = mod2View.getText();
-                }
-                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice3 = mod3View.getText();
-                }
-            }
-            case "mod2Choice" -> {
-                choice2 = mod2Choice.getSelectionModel().getSelectedItem();
-                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+        Object source = event.getSource();
+        ChoiceBox<?> cb;
+        if (source instanceof ChoiceBox<?>) {
+            cb = (ChoiceBox<?>) event.getSource();
+            switch (cb.getId()) {
+                case "mod1Choice" -> {
                     choice1 = mod1Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice1 = mod1View.getText();
+                    if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice2 = mod2View.getText();
+                    }
+                    if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice3 = mod3View.getText();
+                    }
                 }
-                if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice3 = mod3View.getText();
-                }
-            }
-            case "mod3Choice" -> {
-                choice3 = mod3Choice.getSelectionModel().getSelectedItem();
-                if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
-                    choice1 = mod1Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice1 = mod1View.getText();
-                }
-                if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                case "mod2Choice" -> {
                     choice2 = mod2Choice.getSelectionModel().getSelectedItem();
-                } else {
-                    choice2 = mod2View.getText();
+                    if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice1 = mod1View.getText();
+                    }
+                    if (mod3Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice3 = mod3View.getText();
+                    }
+                }
+                case "mod3Choice" -> {
+                    choice3 = mod3Choice.getSelectionModel().getSelectedItem();
+                    if (mod1Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice1 = mod1Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice1 = mod1View.getText();
+                    }
+                    if (mod2Choice.getSelectionModel().getSelectedItem() != null) {
+                        choice2 = mod2Choice.getSelectionModel().getSelectedItem();
+                    } else {
+                        choice2 = mod2View.getText();
+                    }
                 }
             }
+        } else {
+            System.out.println("[ERROR] The object passed to the event was not of the expected type.");
+            System.out.println("[INFO] Expected type: ChoiceBox<?>, Received: " + source.getClass());
         }
     }
 

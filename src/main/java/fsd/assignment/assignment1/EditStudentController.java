@@ -73,47 +73,54 @@ public class EditStudentController {
     }
 
     public void getChoiceEdit(ActionEvent event) {
-        ChoiceBox<String> cb = (ChoiceBox<String>) event.getSource();
-        switch (cb.getId()) {
-            case "mod1ChoiceEdit" -> {
-                mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
-                if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
-                    mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod2S = mod2Edit.getText();
-                }
-                if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
-                    mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod3S = mod3Edit.getText();
-                }
-            }
-            case "mod2ChoiceEdit" -> {
-                mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
-                if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+        Object source = event.getSource();
+        ChoiceBox<?> cb;
+        if (source instanceof ChoiceBox<?>) {
+            cb = (ChoiceBox<?>) event.getSource();
+            switch (cb.getId()) {
+                case "mod1ChoiceEdit" -> {
                     mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod1S = mod1Edit.getText();
+                    if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod2S = mod2Edit.getText();
+                    }
+                    if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod3S = mod3Edit.getText();
+                    }
                 }
-                if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
-                    mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod3S = mod3Edit.getText();
-                }
-            }
-            case "mod3ChoiceEdit" -> {
-                mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
-                if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
-                    mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod1S = mod1Edit.getText();
-                }
-                if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                case "mod2ChoiceEdit" -> {
                     mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
-                } else {
-                    mod2S = mod2Edit.getText();
+                    if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod1S = mod1Edit.getText();
+                    }
+                    if (mod3ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod3S = mod3Edit.getText();
+                    }
+                }
+                case "mod3ChoiceEdit" -> {
+                    mod3S = mod3ChoiceEdit.getSelectionModel().getSelectedItem();
+                    if (mod1ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod1S = mod1ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod1S = mod1Edit.getText();
+                    }
+                    if (mod2ChoiceEdit.getSelectionModel().getSelectedItem() != null) {
+                        mod2S = mod2ChoiceEdit.getSelectionModel().getSelectedItem();
+                    } else {
+                        mod2S = mod2Edit.getText();
+                    }
                 }
             }
+        } else {
+            System.out.println("[ERROR] The object passed to the event was not of the expected type.");
+            System.out.println("[INFO] Expected type: ChoiceBox<?>, Received: " + source.getClass());
         }
     }
 }
